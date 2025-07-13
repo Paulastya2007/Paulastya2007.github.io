@@ -465,4 +465,19 @@
         flex-direction: column;
         align-items: center;
       }
+      .cursor-blink {
+  animation: blink 1s infinite;
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.typing-text {
+  border-right: 2px solid var(--accent-color);
+  padding-right: 5px;
+}
     }
