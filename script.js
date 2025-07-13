@@ -50,7 +50,50 @@
     document.querySelectorAll('.section').forEach(section => {
       observer.observe(section);
     });
+// Typing effect
+const typingTexts = [
+  
+  "Java • Python • Node.js • React",
+  "Cross-platform development enthusiast",
+  "Game development with SDL2",
+  "Always learning, always growing"
+];
 
+let currentTextIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let typingSpeed = 200;
+
+function typeEffect() {
+  const typingElement = document.getElementById('typing-text');
+  const currentText = typingTexts[currentTextIndex];
+  
+  if (isDeleting) {
+    typingElement.textContent = currentText.substring(0, currentCharIndex - 1);
+    currentCharIndex--;
+    typingSpeed = 50;
+  } else {
+    typingElement.textContent = currentText.substring(0, currentCharIndex + 1);
+    currentCharIndex++;
+    typingSpeed = 100;
+  }
+  
+  if (!isDeleting && currentCharIndex === currentText.length) {
+    setTimeout(() => {
+      isDeleting = true;
+    }, 2000);
+  } else if (isDeleting && currentCharIndex === 0) {
+    isDeleting = false;
+    currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
+  }
+  
+  setTimeout(typeEffect, typingSpeed);
+}
+
+// Start typing effect when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(typeEffect, 1000);
+});
     // Navbar background on scroll
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('.nav-container');
